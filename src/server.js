@@ -1,3 +1,4 @@
+import "./db";
 import express from "express";
 import morgan from "morgan";
 import globalRouter from "./routers/globalRouter";
@@ -17,4 +18,4 @@ app.use("/", globalRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 
-app.listen(PORT, () => console.log(`Listening!`));
+app.listen(PORT, () => console.log(`✅ Listening!`));

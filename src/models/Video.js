@@ -4,12 +4,12 @@ const videoSchema = new mongoose.Schema({
   title: String,
   description: String,
   createdAt: Date,
-  hastags: [{ type: String }],
+  hashtags: [{ type: String }],
   meta: {
     views: Number,
     ratings: Number,
   },
 });
 
-const movieModel = mongoose.model("video", videoSchema);
-export default movieModel;
+const Video = mongoose.model("Video", videoSchema);
+export default Video;

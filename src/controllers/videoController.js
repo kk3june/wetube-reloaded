@@ -9,13 +9,8 @@ export const home = async (req, res) => {
   //   return res.render("home", { pageTitle: "Home", videos: [] });
   // });
 
-  //using Promise (async, await)
-  try {
-    const videos = await Video.find({});
-    return res.render("home", { pageTitle: "Home", videos });
-  } catch {
-    return res.render("server-error");
-  }
+  const videos = await Video.find({});
+  return res.render("home", { pageTitle: "Home", videos });
 };
 export const watch = (req, res) => {
   const { id } = req.params;
@@ -31,24 +26,21 @@ export const postEdit = (req, res) => {
   videos[id].title = title;
   return res.redirect(`/videos/${id}`);
 };
+
 export const getUpload = (req, res) => {
   return res.render("upload", { pageTitle: "Upload Video" });
 };
 export const postUpload = (req, res) => {
-  // here will add a video to the videos array
-  const { title } = req.body;
-  const newVideo = {
+  const { title, description, hashtags } = req.body;
+  const video = new Video({
     title,
-    rating: 0,
-    comments: 0,
-    createdAty: "just now",
-    views: 0,
-    id: videos.length + 1,
-  };
-  videos.push(newVideo);
+    description,
+    createdAt: Date.now(),
+    hashtags: hashtags.split(",").map((word) => `${word}`),
+    meta: {
+      views: 0,
+      rating: 0,
+    },
+  });
   return res.redirect("/");
-};
-export const search = (req, res) => res.send("Search");
-export const deleteVideo = (req, res) => {
-  return res.send("Delete Video");
 };

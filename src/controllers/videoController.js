@@ -74,3 +74,12 @@ export const postUpload = async (req, res) => {
     });
   }
 };
+
+export const search = (req, res) => {
+  // console.log(req.query);
+  const { keyword } = req.query;
+  if (keyword) {
+    //search
+  }
+  return res.render("search", { pageTitle: "Search" });
+};

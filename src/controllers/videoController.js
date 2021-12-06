@@ -75,11 +75,16 @@ export const postUpload = async (req, res) => {
   }
 };
 
-export const search = (req, res) => {
+export const search = async (req, res) => {
   // console.log(req.query);
   const { keyword } = req.query;
+  let videos = [];
   if (keyword) {
-    //search
+    videos = await Video.find({
+      title: {
+        $regex: new RegExp(`^${keyword}`, "i"),
+      },
+    });
   }
-  return res.render("search", { pageTitle: "Search" });
+  return res.render("search", { pageTitle: "Search", videos });
 };

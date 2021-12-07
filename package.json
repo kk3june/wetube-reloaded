@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/kk3june/wetube-reloaded#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "install": "^0.13.0",
     "mongoose": "^6.0.13",

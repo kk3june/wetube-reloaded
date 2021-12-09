@@ -21,23 +21,22 @@ export const postJoin = async (req, res) => {
   //   });
   // }
 
-  // usermane, email 동시에 validation
-  const exists = await User.exists({ $or: [{ username }, { email }] });
-  if (exists) {
-    return res.render("Join", {
-      pageTitle,
-      errorMessage: "This username/email is already taken.",
-    });
-  }
-
   // password validation
   if (password !== password2) {
-    return res.render("Join", {
+    return res.status(400).render("join", {
       pageTitle,
       errorMessage: "Password confirmation does not match.",
     });
   }
 
+  // usermane, email 동시에 validation
+  const exists = await User.exists({ $or: [{ username }, { email }] });
+  if (exists) {
+    return res.status(400).render("join", {
+      pageTitle,
+      errorMessage: "This username/email is already taken.",
+    });
+  }
   await User.create({
     name,
     username,
@@ -45,7 +44,7 @@ export const postJoin = async (req, res) => {
     password,
     location,
   });
-  return res.redirect("/");
+  return res.redirect("/login");
 };
 
 export const edit = (req, res) => res.send("Edit User");

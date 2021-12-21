@@ -1,4 +1,4 @@
-import Video from "../models/Video";
+import Video from "../models/Video.js";
 
 export const home = async (req, res) => {
   // using callback
